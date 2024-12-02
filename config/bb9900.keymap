@@ -24,14 +24,24 @@
             tapping-term-ms = <400>;
             bindings = <&mkp LCLK>, <&bt BT_CLR>;
         };
-    };
-    behaviors {
+        
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <500>;
             bindings = <&out &kp>;
         };
+
+        // both tap and hold should be normal characters
+        thk: tap_hold_for_keys {
+            compatible = "zmk,behavior-hold-tap";
+            label = "default chars";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&kp>, <&kp>;
+        };          
     };
 
     keymap {
@@ -51,9 +61,9 @@
 
                  &mkp LCLK                                                                                          &mkp RCLK
     &kp CLCK                &kp LGUI                            &mkp LCLK                          &mt ESC K_BACK                    &kp TAB
-    &kp Q        &kp W      &kp E       &kp R     &kp T         &kp Y             &kp U            &kp I            &kp O            &kp P
-    &kp A        &kp S      &kp D       &kp F     &kp G         &kp H             &kp J            &kp K            &kp L            &kp BSPC
-    &kp LSHFT    &kp Z      &kp X       &kp C     &kp V         &kp B             &kp N            &kp M            &kp SEMI         &kp ENTER
+    &thk HASH Q        &thk N1 W      &thk N2 E       &thk N3 R     &thk LPAR T         &thk RPAR Y             &thk UNDER U            &thk MINUS I            &thk PLUS O            &thk AT P
+    &thk STAR A        &thk N4 S      &thk N5 D       &thk N6 F     &thk SLASH G        &thk COLON H            &thk SEMI  J            &thk APOS K             &thk DQT L             &kp BSPC
+    &kp LSHFT          &thk N7 Z      &thk N8 X       &thk N9 C     &thk QMARK V        &thk EXCL B             &thk COMMA N            &thk DOT M              &thk C_MUTE SEMI       &kp ENTER
     &kp LCTRL               &kp LALT                            &kp SPACE                          &tog SYM                          &tog UPPER
             >;
         };
